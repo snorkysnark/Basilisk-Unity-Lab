@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa53821f84ed2b4db9a9ddea467831b, type: 3}
+  m_Name: Thingies
+  m_EditorClassIdentifier: 
+  items:
+  - prefab: {fileID: 7607004975253955093, guid: 7eeae809120649d4586b5454419d4e06,
+      type: 3}
+    weight: 1
+  - prefab: {fileID: 2483450744890142163, guid: 080bef3ef3389d14d87a286d5fa31435,
+      type: 3}
+    weight: 3
+  - prefab: {fileID: 7802051943658017208, guid: 4f7ad2b5d9bf0724ab389ee4ed3f0c43,
+      type: 3}
+    weight: 2
