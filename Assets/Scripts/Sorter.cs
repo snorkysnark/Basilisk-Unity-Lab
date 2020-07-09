@@ -28,12 +28,9 @@ public class Sorter : Powerable
 
     public override void Power()
     {
-        var sorted = boxes.OrderBy((box) => box.localScale.y);
-        int position = 0;
-        foreach(Transform box in sorted)
-        {
-            box.position = CalculatePosition(position);
-            position++;
-        }
+        /*
+            Можно использовать LINQ
+        */
+        throw new System.NotImplementedException("Здесь должна быть сортировка по высоте");
     }
 }

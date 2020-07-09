@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Renderer))]
-public class Star : Powerable
+public class Star : MonoBehaviour //: Powerable
 {
     [SerializeField] Material onMaterial = null;
     [SerializeField] Material offMaterial = null;
@@ -19,11 +19,11 @@ public class Star : Powerable
         Assert.IsNotNull(myLight, "Star has no light");
     }
 
-    public override void Power()
-    {
-        on = !on;
-        UpdateVisuals();
-    }
+    // public override void Power()
+    // {
+    //     on = !on;
+    //     UpdateVisuals();
+    // }
 
     private void UpdateVisuals()
     {

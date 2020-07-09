@@ -12,6 +12,7 @@ public class Tentacle : MonoBehaviour
     private Vector3 lastTargetPosition;
     private Vector3 rootPosition;
 
+#region data-setup
     private class Bone
     {
         public readonly Transform transform;
@@ -45,6 +46,20 @@ public class Tentacle : MonoBehaviour
         }
     }
 
+    private void InitBones()
+    {
+        bones = new Bone[tentacleParent.childCount - 1];
+        for(int i = 0; i < bones.Length; i++)
+        {
+            Transform boneStart = tentacleParent.GetChild(i);
+            Transform boneEnd = tentacleParent.GetChild(i + 1);
+            float length = Vector3.Distance(boneStart.position, boneEnd.position);
+            bones[i] = new Bone(boneStart, length);
+        }
+    }
+#endregion
+
+#region unity-events
     private void Start()
     {
         Assert.IsNotNull(tentacleParent);
@@ -72,24 +87,9 @@ public class Tentacle : MonoBehaviour
             Gizmos.DrawLine(bone.StartPoint, bone.EndPoint);
         }
     }
+#endregion
 
-    private void InitBones()
-    {
-        bones = new Bone[tentacleParent.childCount - 1];
-        for(int i = 0; i < bones.Length; i++)
-        {
-            Transform boneStart = tentacleParent.GetChild(i);
-            Transform boneEnd = tentacleParent.GetChild(i + 1);
-            float length = Vector3.Distance(boneStart.position, boneEnd.position);
-            bones[i] = new Bone(boneStart, length);
-        }
-    }
-
-    private bool CloseToTarget()
-    {
-        return (bones.Last().EndPoint - target.position).sqrMagnitude <= Mathf.Epsilon;
-    }
-
+#region exercise
     private void ResolveIK()
     {
         int iterationCount = 0;
@@ -103,25 +103,21 @@ public class Tentacle : MonoBehaviour
 
     private void EndPointToRoot()
     {
-        Vector3 currentTarget = target.position;
-        for(int i = bones.Length - 1; i > -1; i--)
-        {
-            Bone bone = bones[i];
-            bone.LookDirection(currentTarget - bone.StartPoint);
-            bone.Align(currentTarget, bone.EndPoint);
-            currentTarget = bone.StartPoint;
-        }
+        /*
+            Проходимся от конца к началу
+        */
     }
 
     private void RootToEndPoint()
     {
-        Vector3 currentTarget = rootPosition;
-        for(int i = 0; i < bones.Length; i++)
-        {
-            Bone bone = bones[i];
-            bone.LookDirection(bone.EndPoint - currentTarget);
-            bone.Align(currentTarget, bone.StartPoint);
-            currentTarget = bone.EndPoint;
-        }
+        /*
+            Проходимся от начала к концу
+        */
     }
+
+    private bool CloseToTarget()
+    {
+        return (bones.Last().EndPoint - target.position).sqrMagnitude <= Mathf.Epsilon;
+    }
+#endregion
 }

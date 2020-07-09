@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator), typeof(AudioSource)), SelectionBase]
-public class Button : MonoBehaviour, IInteractible
+public class Button : MonoBehaviour //, IInteractible
 {
     const string ANIMATION_TRIGGER = "Push";
     

@@ -13,6 +13,7 @@ public class MazeSolver : Powerable
     private PathfindingGraph graph;
     private List<Vector3> path;
 
+#region unity-events
     private void Start()
     {
         graph = new PathfindingGraph(maze);
@@ -39,7 +40,9 @@ public class MazeSolver : Powerable
             walker.transform.position = maze.CellWorldPosition(startingPoint.x, startingPoint.y);
         }
     }
+#endregion
 
+#region exercise
     public override void Power()
     {
         if(path == null) path = Solve();
@@ -48,38 +51,10 @@ public class MazeSolver : Powerable
 
     private List<Vector3> Solve()
     {
-        List<Node> open = new List<Node>();
-        Node start = graph.GetNodeByPosition(startingPoint);
-        start.gCost = 0;
-        start.fCost = EstimateCost(start);
-        open.Add(start);
-
-        while(open.Count > 0)
-        {
-            Node current = open.Min();
-            if(IsGoal(current))
-            {
-                return ReconstructPath(current);
-            }
-            open.Remove(current);
-
-            foreach(Node neighbor in current.connections)
-            {
-                int newGCost = current.gCost + 1;
-                if(newGCost < neighbor.gCost)
-                {
-                    neighbor.gCost = newGCost;
-                    neighbor.fCost = neighbor.fCost + EstimateCost(neighbor);
-                    neighbor.cameFrom = current;
-                    if(!open.Contains(neighbor))
-                    {
-                        open.Add(neighbor);
-                    }
-                }
-            }
-        }
-
-        return null;
+        /*
+            Место для алгоритма A*
+        */
+        throw new NotImplementedException("Здесь должен быть поиск пути");
     }
 
     private bool IsGoal(Node node)
@@ -104,7 +79,9 @@ public class MazeSolver : Powerable
     {
         return Mathf.Abs(node.x - maze.GoalPosition.x) + Mathf.Abs(node.y + maze.GoalPosition.y);
     }
+#endregion
 
+#region data-setup
     private class PathfindingGraph
     {
         private Maze maze;
@@ -194,4 +171,5 @@ public class MazeSolver : Powerable
                 return fCost.CompareTo(other.fCost);
             }
         }
+#endregion
 }

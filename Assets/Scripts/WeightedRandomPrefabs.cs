@@ -32,15 +32,9 @@ public class WeightedRandomPrefabs : ScriptableObject
 
     public GameObject GetRandom()
     {
-        float rnd = Random.Range(0f, weightSum);
-        foreach(Item item in items)
-        {
-            if(rnd <= item.weight)
-            {
-                return item.prefab;
-            }
-            rnd -= item.weight;
-        }
-        throw new Exception("Shouldn't get here");
+        /*
+            Напишите взвешенный рандом
+        */
+        throw new System.NotImplementedException("Здесь должен быть взвешенный рандом");
     }
 }
